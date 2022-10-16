@@ -8,7 +8,8 @@
     "eslint": "eslint **/*.ts --ignore-path .gitignore",
     "eslint:fix": "eslint **/*.ts --fix --ignore-path .gitignore",
     "prettier": "prettier **/*.ts --check --ignore-path .gitignore",
-    "prettier:fix": "prettier **/*.ts --write --ignore-path .gitignore"
+    "prettier:fix": "prettier **/*.ts --write --ignore-path .gitignore",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,13 @@
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
     "eslint-plugin-sonarjs": "^0.16.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
     "typescript": "^4.8.4"
+  },
+  "lint-staged": {
+    "**/*.ts": "eslint",
+    "**/*.{ts,md}": "prettier --write"
   }
 }
