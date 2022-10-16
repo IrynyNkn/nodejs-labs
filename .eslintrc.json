@@ -20,5 +20,18 @@
         "sonarjs"
     ],
     "rules": {
+        "no-console": "warn",
+        "no-var": "error",
+        "no-else-return": "warn",
+        "quotes": ["warn", "single"],
+        "no-dupe-keys": "warn",
+        "no-empty": "warn",
+        "no-fallthrough": "error",
+        "no-unreachable": "error",
+        "arrow-body-style": "warn",
+        "camelcase": "warn",
+        "no-empty-function": "error",
+        "@typescript-eslint/semi": ["off"],
+        "no-magic-numbers": "warn"
     }
 }

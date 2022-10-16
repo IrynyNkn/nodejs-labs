@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
+    "strict": true,
     "module": "ESNext",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
     //    "sourceMap": true
   }
 }
