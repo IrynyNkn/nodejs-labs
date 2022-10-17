@@ -1,37 +1,33 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:sonarjs/recommended"
-    ],
-    "overrides": [
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "sonarjs"
-    ],
-    "rules": {
-        "no-console": "warn",
-        "no-var": "error",
-        "no-else-return": "warn",
-        "quotes": ["warn", "single"],
-        "no-dupe-keys": "warn",
-        "no-empty": "warn",
-        "no-fallthrough": "error",
-        "no-unreachable": "error",
-        "arrow-body-style": "warn",
-        "camelcase": "warn",
-        "no-empty-function": "error",
-        "@typescript-eslint/semi": ["off"],
-        "no-magic-numbers": "warn"
-    }
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:sonarjs/recommended"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "sonarjs"],
+  "rules": {
+    "no-console": "warn",
+    "no-var": "error",
+    "no-else-return": "warn",
+    "quotes": ["warn", "single"],
+    "no-dupe-keys": "warn",
+    "no-empty": "warn",
+    "no-fallthrough": "error",
+    "no-unreachable": "error",
+    "arrow-body-style": "warn",
+    "camelcase": "warn",
+    "no-empty-function": "error",
+    "@typescript-eslint/semi": ["off"],
+    "no-magic-numbers": "warn"
+  }
 }

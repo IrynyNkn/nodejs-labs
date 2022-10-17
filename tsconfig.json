@@ -8,6 +8,6 @@
     "moduleResolution": "nodenext",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
+    "strictNullChecks": true
   }
 }
