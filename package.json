@@ -34,6 +34,6 @@
   },
   "lint-staged": {
     "**/*.ts": "eslint",
-    "**/*.{ts,md}": "prettier --check"
+    "*": "prettier --check --ignore-path .gitignore"
   }
 }
