@@ -26,6 +26,7 @@
     "@typescript-eslint/parser": "^5.40.0",
     "@vercel/node": "^2.5.24",
     "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-sonarjs": "^0.16.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
