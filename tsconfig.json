@@ -5,7 +5,7 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
