@@ -1,5 +1,4 @@
-import defaultHandler from './defaultHandler.js'
-import { HTTP_METHODS } from './utils/consts.js'
+import { HTTP_METHODS } from './utils/consts'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 
 type Handler = (
@@ -39,7 +38,7 @@ class Router {
     const routeHandlers = this.handlers[urlPath as string]?.[method]
 
     if (!routeHandlers || routeHandlers.length === 0) {
-      defaultHandler(res)
+      res.status(404).send('Not found')
       return
     }
 
