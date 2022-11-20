@@ -1,4 +1,3 @@
-export const PORT = process.env.PORT || 3000
 export enum HTTP_METHODS {
   GET = 'GET',
   POST = 'POST',
