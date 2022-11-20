@@ -1,78 +1,55 @@
-import { IncomingMessage, ServerResponse } from 'http'
-import { URL } from 'url'
 import defaultHandler from './defaultHandler.js'
-import convertToJson from './utils/convertToJson.js'
-import getContentType from './utils/getContentType.js'
 import { HTTP_METHODS } from './utils/consts.js'
+import { VercelRequest, VercelResponse } from '@vercel/node'
 
 type Handler = (
-  req: IncomingMessage,
-  res: ServerResponse,
+  req: VercelRequest,
+  res: VercelResponse,
   payload: any,
 ) => void | Promise<void>
 
-const processedContentTypes: { [key: string]: (val: string) => any } = {
-  'text/html': (text: string) => text,
-  'text/plain': (text: string) => text,
-  'application/json': (json: string) => convertToJson(json),
-  'application/x-www-form-urlencoded': (data: string) => {
-    return Object.fromEntries(new URLSearchParams(data))
-  },
-}
-
 class Router {
   private handlers: { [path: string]: { [method: string]: Handler[] } } = {}
+  private readonly basePath: string
 
-  add(method: HTTP_METHODS, path = '/', ...handlers: Handler[]) {
-    if (handlers.length === 0)
-      throw new Error(
-        `The handler for method ${method} and path ${path} doesn't exist`,
-      )
-
-    if (!this.handlers[path]?.[method])
-      this.handlers[path] = {
-        ...(this.handlers[path] || {}),
-        [method]: [...handlers],
-      }
-    else this.handlers[path][method].push(...handlers)
+  constructor(path: string) {
+    this.basePath = path
   }
 
-  async handle(req: IncomingMessage, res: ServerResponse): Promise<void> {
-    const url = new URL(req.url || '/', `http://${req.headers.host}`)
-    const urlPath = url.pathname
+  add(method: HTTP_METHODS, path = '/', ...handlers: Handler[]) {
+    const composedPath = this.basePath + path
 
+    if (handlers.length === 0)
+      throw new Error(
+        `The handler for method ${method} and path ${composedPath} doesn't exist`,
+      )
+
+    if (!this.handlers[composedPath]?.[method])
+      this.handlers[composedPath] = {
+        ...(this.handlers[composedPath] || {}),
+        [method]: [...handlers],
+      }
+    else this.handlers[composedPath][method].push(...handlers)
+  }
+
+  async handle(req: VercelRequest, res: VercelResponse): Promise<void> {
+    const urlPath = req.url
     const method = req.method || HTTP_METHODS.GET
 
-    const routeHandlers = this.handlers[urlPath]?.[method]
+    const routeHandlers = this.handlers[urlPath as string]?.[method]
 
     if (!routeHandlers || routeHandlers.length === 0) {
       defaultHandler(res)
       return
     }
 
-    let payload = {}
-    let rawRequestStr = ''
-    for await (const chunk of req) {
-      rawRequestStr += chunk
-    }
+    const payload = req.body || {}
 
-    const contentTypeHeader = req.headers['content-type']
-
-    if (contentTypeHeader) {
-      const contentType: string = getContentType(contentTypeHeader)
-      if (processedContentTypes[contentType]) {
-        payload = processedContentTypes[contentType](rawRequestStr)
-      }
-    }
-
-    for (const handler of this.handlers[urlPath][method]) {
+    for (const handler of this.handlers[urlPath as string][method]) {
       try {
         await handler(req, res, payload)
-      } catch (e) {
-        res.statusCode = 500
-        res.end(
-          process.env.NODE_ENV === 'production' ? 'Internal Server Error' : e,
-        )
+      } catch {
+        res.status(500).send('Internal Server Error')
       }
     }
   }

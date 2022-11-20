@@ -1,19 +1,17 @@
 import Router from '../Router.js'
-import send from '../response.js'
 
-const router = new Router()
+const router = new Router('/api')
 
 router.get('/', (req, res) => {
-  send(res, { message: 'i am a root route :)' }, 'application/json')
+  res.send({ message: 'i am a root route :)' })
 })
 
 router.get('/test', (req, res) => {
-  send(res, { message: 'i am a test route :)' }, 'application/json')
+  res.send({ message: 'i am a test route :)' })
 })
 
 router.post('/test', (req, res, payload) => {
-  const contentType = req.headers['content-type']
-  send(res, payload, contentType)
+  res.send(payload)
 })
 
 export default router
