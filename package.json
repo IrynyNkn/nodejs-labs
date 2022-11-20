@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start:dev": "nodemon",
     "eslint": "eslint **/*.ts --ignore-path .gitignore",
     "eslint:fix": "eslint **/*.ts --fix --ignore-path .gitignore",
     "prettier": "prettier . --check --ignore-path .gitignore",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/IrynyNkn/nodejs-labs#readme",
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "@vercel/node": "^2.5.24",
@@ -30,7 +32,9 @@
     "eslint-plugin-sonarjs": "^0.16.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
+    "nodemon": "^2.0.20",
     "prettier": "2.7.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
   },
   "lint-staged": {

@@ -8,6 +8,13 @@
     "moduleResolution": "nodenext",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "outDir": "build",
+    "rootDir": "src",
+    "downlevelIteration": true,
+    "esModuleInterop": true
+  },
+  "ts-node": {
+    "esm": true
   }
 }
